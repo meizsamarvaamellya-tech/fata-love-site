@@ -4,27 +4,29 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Animated Heart — Fata Abdillah</title>
+
   <style>
     :root{--bg:#0f172a;--heart:#ff4d6d;--accent:#ffd1dc}
     html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
     body{background:linear-gradient(180deg,var(--bg),#071026);display:grid;place-items:center;color:white}
 
-    /* Container */
-    .card{width:320px;max-width:90vw;padding:28px;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,23,0.6);text-align:center}
+    .card{
+      width:320px;max-width:90vw;padding:28px;border-radius:18px;
+      background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);text-align:center
+    }
 
-    /* Heart shape made with one element */
     .heart{
       width:120px;height:120px;position:relative;margin:0 auto 18px;transform:rotate(-45deg);
-      animation:float 3.6s ease-in-out infinite;
-      will-change:transform,opacity;
+      animation:float 3.6s ease-in-out infinite;will-change:transform,opacity
     }
     .heart::before,.heart::after{
-      content:'';position:absolute;width:120px;height:120px;border-radius:50%;background:var(--heart);top:0;left:0;
-      box-shadow:0 6px 18px rgba(0,0,0,0.25), inset 0 -6px 12px rgba(255,255,255,0.06);
+      content:'';position:absolute;width:120px;height:120px;border-radius:50%;
+      background:var(--heart);top:0;left:0;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25), inset 0 -6px 12px rgba(255,255,255,0.06)
     }
     .heart::after{left:60px}
 
-    /* make it beat */
     .heart.beat{animation-name:beatFloat;animation-duration:1.25s}
     @keyframes beatFloat{
       0%{transform:rotate(-45deg) scale(1)}
@@ -35,28 +37,41 @@
     }
 
     @keyframes float{
-      0%{transform:rotate(-45deg) translateY(0) translateX(0) }
+      0%{transform:rotate(-45deg) translateY(0) translateX(0)}
       50%{transform:rotate(-45deg) translateY(-12px) translateX(6px)}
       100%{transform:rotate(-45deg) translateY(0) translateX(0)}
     }
 
-    /* glowing pulse behind heart */
-    .glow{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;filter:blur(18px);opacity:0.18;background:radial-gradient(circle at 30% 30%, #ff8aa0, transparent 40%);pointer-events:none}
+    .glow{
+      position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
+      width:220px;height:220px;border-radius:50%;filter:blur(18px);opacity:0.18;
+      background:radial-gradient(circle at 30% 30%, #ff8aa0, transparent 40%);pointer-events:none
+    }
 
-    /* name with typing effect */
-    .name{font-size:20px;letter-spacing:1px;position:relative;display:inline-block;padding:8px 12px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));}
-    .name .txt{display:inline-block;overflow:hidden;white-space:nowrap;box-sizing:border-box;border-right:2px solid rgba(255,255,255,0.25);width:0;animation:typing 3s steps(20,end) 0.4s forwards,blink 800ms steps(1,start) infinite 3.6s}
+    .name{
+      font-size:20px;letter-spacing:1px;display:inline-block;padding:8px 12px;
+      border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+    }
+    .name .txt{
+      display:inline-block;overflow:hidden;white-space:nowrap;box-sizing:border-box;
+      border-right:2px solid rgba(255,255,255,0.25);width:0;
+      animation:typing 3s steps(20,end) 0.4s forwards,blink 800ms steps(1,start) infinite 3.6s
+    }
 
-    @keyframes typing{from{width:0}to{width:13.5ch}} /* adjust to suit the name length */
+    @keyframes typing{from{width:0}to{width:13.5ch}}
     @keyframes blink{50%{border-color:transparent}100%{border-color:rgba(255,255,255,0.25)}}
 
-    /* small instructions text */
     .sub{font-size:12px;opacity:0.6;margin-top:12px}
 
-    /* responsive tweaks */
-    @media (max-width:420px){.heart{width:92px;height:92px}.heart::after,.heart::before{width:92px;height:92px}.name{font-size:18px}.card{padding:18px}}
+    @media (max-width:420px){
+      .heart{width:92px;height:92px}
+      .heart::after,.heart::before{width:92px;height:92px}
+      .name{font-size:18px}
+      .card{padding:18px}
+    }
   </style>
 </head>
+
 <body>
   <div class="card">
     <div style="position:relative;display:inline-block">
@@ -66,11 +81,25 @@
 
     <div style="height:8px"></div>
 
-    <!-- Name: taken from your preference -->
-    <div class="name" aria-label="Nama">
+    <div class="name">
       <span class="txt">Fata Abdillah</span>
     </div>
 
+    <div class="sub">Klik hati untuk pause / play animasi</div>
+  </div>
+
+  <script>
+    const heart = document.querySelector('.heart');
+    let beating = true;
+
+    heart.addEventListener('click', () => {
+      beating = !beating;
+      if(beating) heart.classList.add('beat');
+      else heart.classList.remove('beat');
+    });
+  </script>
+</body>
+</html>
     <div class="sub">Tekan atau ketuk hati untuk hentikan/lanjutkan beat · Buka <code>index.html</code> untuk lihat</div>
   </div>
 
