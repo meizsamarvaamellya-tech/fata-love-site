@@ -3,206 +3,125 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CodingLove — contoh bentuk love</title>
+  <title>Animated Heart — Fata Abdillah</title>
+
   <style>
-    :root{
-      --bg:#f6f7fb;
-      --accent1:#4285F4; /* blue */
-      --accent2:#DB4437; /* red */
-      --accent3:#F4B400; /* yellow */
-      --accent4:#0F9D58; /* green */
-      --card:#fff;
-      --shadow: 0 10px 30px rgba(20,20,40,0.08);
-    }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family:Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:linear-gradient(180deg,var(--bg),#eef3ff);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px;
-      color:#111;
-    }
+    :root{--bg:#0f172a;--heart:#ff4d6d;--accent:#ffd1dc}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,var(--bg),#071026);display:grid;place-items:center;color:white}
 
     .card{
-      width:720px;
-      max-width:95vw;
-      background:var(--card);
-      border-radius:16px;
-      box-shadow:var(--shadow);
-      padding:34px;
-      display:grid;
-      grid-template-columns:1fr 220px;
-      gap:24px;
-      align-items:center;
+      width:320px;max-width:90vw;padding:28px;border-radius:18px;
+      background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);text-align:center
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-    .logo-letters{
-      font-weight:700;
-      font-size:36px;
-      letter-spacing:1px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-    .logo-letters span{display:inline-block}
-    .c1{color:var(--accent1)}
-    .c2{color:var(--accent2)}
-    .c3{color:var(--accent3)}
-    .c4{color:var(--accent4)}
-
-    .tagline{color:#666;font-size:14px}
-
-    /* Heart area */
-    .heart-wrap{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-      flex-direction:column;
-    }
-
-    /* CSS heart */
     .heart{
-      width:160px;
-      height:160px;
-      position:relative;
-      transform:rotate(-45deg);
-      animation:pop 1.1s ease both;
-      cursor:pointer;
+      width:120px;height:120px;position:relative;margin:0 auto 18px;transform:rotate(-45deg);
+      animation:float 3.6s ease-in-out infinite;will-change:transform,opacity
     }
-    .heart::before,
-    .heart::after{
-      content:"";
-      position:absolute;
-      width:100px;
-      height:100px;
-      border-radius:50%;
-      background:conic-gradient(from 90deg at 50% 50%, var(--accent2), var(--accent1), var(--accent3), var(--accent4));
-      box-shadow:inset 0 -6px 12px rgba(255,255,255,0.08);
+    .heart::before,.heart::after{
+      content:'';position:absolute;width:120px;height:120px;border-radius:50%;
+      background:var(--heart);top:0;left:0;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25), inset 0 -6px 12px rgba(255,255,255,0.06)
     }
-    .heart::before{top:-50px;left:0}
-    .heart::after{top:0;left:50px}
-    .heart-inner{
-      position:absolute;left:20px;top:20px;width:120px;height:120px;background:white;border-radius:8px;transform:rotate(45deg);
-      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:26px;color:#222;
-      box-shadow:0 6px 18px rgba(15,15,40,0.06);
-    }
+    .heart::after{left:60px}
 
-    @keyframes pop{
-      0%{transform:rotate(-45deg) scale(.4);opacity:0}
-      60%{transform:rotate(-45deg) scale(1.05);opacity:1}
+    .heart.beat{animation-name:beatFloat;animation-duration:1.25s}
+    @keyframes beatFloat{
+      0%{transform:rotate(-45deg) scale(1)}
+      22%{transform:rotate(-45deg) scale(1.12)}
+      40%{transform:rotate(-45deg) scale(0.98)}
+      60%{transform:rotate(-45deg) scale(1.06)}
       100%{transform:rotate(-45deg) scale(1)}
     }
 
-    .info{
-      font-size:14px;color:#333;line-height:1.45;
+    @keyframes float{
+      0%{transform:rotate(-45deg) translateY(0) translateX(0)}
+      50%{transform:rotate(-45deg) translateY(-12px) translateX(6px)}
+      100%{transform:rotate(-45deg) translateY(0) translateX(0)}
     }
 
-    .controls{display:flex;gap:8px;margin-top:12px}
-    button{
-      border:0;padding:10px 12px;border-radius:10px;font-weight:600;cursor:pointer;background:#f3f6ff;color:#0b3a8a;box-shadow:0 6px 14px rgba(11,58,138,0.06);
+    .glow{
+      position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
+      width:220px;height:220px;border-radius:50%;filter:blur(18px);opacity:0.18;
+      background:radial-gradient(circle at 30% 30%, #ff8aa0, transparent 40%);pointer-events:none
     }
-    button.ghost{background:transparent;color:#444;border:1px solid #e6e9f8}
 
-    .right-col{display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .credits{font-size:12px;color:#666;margin-top:8px}
+    .name{
+      font-size:20px;letter-spacing:1px;display:inline-block;padding:8px 12px;
+      border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+    }
+    .name .txt{
+      display:inline-block;overflow:hidden;white-space:nowrap;box-sizing:border-box;
+      border-right:2px solid rgba(255,255,255,0.25);width:0;
+      animation:typing 3s steps(20,end) 0.4s forwards,blink 800ms steps(1,start) infinite 3.6s
+    }
 
-    /* responsive */
-    @media (max-width:720px){
-      .card{grid-template-columns:1fr;}
-      .heart{width:140px;height:140px}
-      .heart::before,.heart::after{width:86px;height:86px}
+    @keyframes typing{from{width:0}to{width:13.5ch}}
+    @keyframes blink{50%{border-color:transparent}100%{border-color:rgba(255,255,255,0.25)}}
+
+    .sub{font-size:12px;opacity:0.6;margin-top:12px}
+
+    @media (max-width:420px){
+      .heart{width:92px;height:92px}
+      .heart::after,.heart::before{width:92px;height:92px}
+      .name{font-size:18px}
+      .card{padding:18px}
     }
   </style>
 </head>
+
 <body>
   <div class="card">
-    <div>
-      <div class="brand">
-        <div class="logo-letters" aria-hidden>
-          <span class="c1">C</span>
-          <span class="c2">o</span>
-          <span class="c3">d</span>
-          <span class="c1">i</span>
-          <span class="c4">n</span>
-          <span class="c2">g</span>
-          <span style="margin-left:6px;color:#111;font-weight:700;font-size:24px">Love</span>
-        </div>
-        <div class="tagline">Contoh bentuk ♥ (CSS) untuk situs sederhana</div>
-      </div>
-
-      <div style="height:18px"></div>
-
-      <div class="info">
-        Tekan ♥ di samping untuk memberi efek kecil. Salin file HTML ini lalu buka di browser (double-click) untuk melihat.
-        Kode ini dibuat satu berkas (HTML/CSS/JS). Jika Anda ingin mengubah nama situs, ganti teks pada bagian logo (elemen <span> di atas).
-      </div>
-
-      <div class="controls">
-        <button id="togglePulse">Toggle Pulse</button>
-        <button class="ghost" id="download">Download HTML</button>
-      </div>
+    <div style="position:relative;display:inline-block">
+      <div class="glow"></div>
+      <div class="heart beat" aria-hidden="true"></div>
     </div>
 
-    <div class="right-col">
-      <div class="heart-wrap">
-        <div class="heart" id="heart" title="Klik untuk love">
-          <div class="heart-inner" id="heartLabel">♥</div>
-        </div>
-        <div class="credits">Klik hati untuk efek. Warna dibuat menyerupai palet cerah.</div>
-      </div>
+    <div style="height:8px"></div>
+
+    <div class="name">
+      <span class="txt">Fata Abdillah</span>
     </div>
+
+    <div class="sub">Klik hati untuk pause / play animasi</div>
   </div>
 
   <script>
-    const heart = document.getElementById('heart');
-    const label = document.getElementById('heartLabel');
-    let pulsing = true;
+    const heart = document.querySelector('.heart');
+    let beating = true;
 
-    function pulseOn(){
-      heart.style.animation = 'pop 1.1s ease both, beat 1s infinite ease-in-out';
-      const style = document.createElement('style');
-      style.id='beat-style';
-      style.innerHTML='@keyframes beat{0%,100%{transform:rotate(-45deg) scale(1)}50%{transform:rotate(-45deg) scale(1.06)}}';
-      document.head.appendChild(style);
-    }
-    function pulseOff(){
-      heart.style.animation = 'pop 1.1s ease both';
-      const s = document.getElementById('beat-style'); if(s) s.remove();
-    }
+    heart.addEventListener('click', () => {
+      beating = !beating;
+      if(beating) heart.classList.add('beat');
+      else heart.classList.remove('beat');
+    });
+  </script>
+</body>
+</html>
+    <div class="sub">Tekan atau ketuk hati untuk hentikan/lanjutkan beat · Buka <code>index.html</code> untuk lihat</div>
+  </div>
 
-    heart.addEventListener('click',()=>{
-      label.textContent = label.textContent === '♥' ? '❤' : '♥';
-      // quick flash
-      heart.style.transform = 'rotate(-45deg) scale(1.12)';
-      setTimeout(()=>heart.style.transform='rotate(-45deg) scale(1)',160);
+  <script>
+    // Toggle heartbeat on click/tap
+    const heart = document.querySelector('.heart');
+    let beating = true;
+    heart.addEventListener('click', ()=>{
+      beating = !beating;
+      if(beating) heart.classList.add('beat'); else heart.classList.remove('beat');
     });
 
-    document.getElementById('togglePulse').addEventListener('click',()=>{
-      pulsing = !pulsing; if(pulsing) pulseOn(); else pulseOff();
+    // Make name typing restart once page visible
+    const nameTxt = document.querySelector('.txt');
+    document.addEventListener('visibilitychange', ()=>{
+      if(!document.hidden){
+        nameTxt.style.animation = 'none';
+        // force reflow
+        void nameTxt.offsetWidth;
+        nameTxt.style.animation = '';
+      }
     });
-
-    // download current HTML as file
-    document.getElementById('download').addEventListener('click',()=>{
-      const doc = `<!doctype html>\n${document.documentElement.outerHTML}`;
-      const blob = new Blob([doc],{type:'text/html'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'codinglove-heart.html';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
-
-    // start pulsing by default
-    pulseOn();
   </script>
 </body>
 </html>
